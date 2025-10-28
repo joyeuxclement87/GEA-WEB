@@ -1,5 +1,6 @@
 import TopBar from '../components/header/TopBar'
 import Navbar from '../components/header/Navbar'
+import Hero from '../components/hero/Hero'
 import Head from 'next/head'
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
       <div className="min-h-screen flex flex-col">
         <TopBar />
         <Navbar />
+        <Hero />
         <main className="flex-grow">
           {/* Your page content will go here */}
           <div className="container mx-auto px-4 py-8">
