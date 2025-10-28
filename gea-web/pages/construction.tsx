@@ -1,105 +1,122 @@
-import { FaHardHat, FaRuler, FaCalculator, FaLightbulb, FaTasks, FaShieldAlt, FaSun } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { FaHardHat, FaBuilding, FaRuler, FaTruck, FaTools, FaCog } from 'react-icons/fa';
 
 const services = [
   {
-    category: "Planning & Design",
-    items: [
-      { icon: FaRuler, title: "Architecture Drawings", description: "Detailed and precise architectural plans for any project." },
-      { icon: FaCalculator, title: "Cost Estimation (BOQ)", description: "Transparent and accurate project cost projections." },
-      { icon: FaLightbulb, title: "Project Consultation", description: "Expert guidance for planning and executing projects." },
-    ]
+    icon: FaHardHat,
+    title: 'Civil Construction',
+    description: 'Commercial and residential building construction with modern standards'
   },
   {
-    category: "Execution & Systems",
-    items: [
-      { icon: FaHardHat, title: "General Contracting", description: "Complete mechanical, electrical, and plumbing solutions." },
-      { icon: FaTasks, title: "Project Management", description: "Ensuring timely delivery from start to finish." },
-      { icon: FaShieldAlt, title: "Fire, Safety, IT & Security", description: "Advanced systems for safety and efficiency." },
-      { icon: FaSun, title: "HVAC and Solar System", description: "Sustainable solutions for energy needs." },
-    ]
+    icon: FaBuilding,
+    title: 'Infrastructure Development',
+    description: 'Roads, bridges, and public infrastructure projects'
+  },
+  {
+    icon: FaRuler,
+    title: 'Project Planning',
+    description: 'Detailed project planning and feasibility studies'
+  },
+  {
+    icon: FaTruck,
+    title: 'Site Management',
+    description: 'Comprehensive site management and logistics'
+  },
+  {
+    icon: FaTools,
+    title: 'Renovation Services',
+    description: 'Building renovation and restoration projects'
+  },
+  {
+    icon: FaCog,
+    title: 'Technical Consulting',
+    description: 'Expert technical consultation and project oversight'
   }
-];
-
-const featuredProjects = [
-  { name: "Kigali Heights", year: "2022", image: "/projects/kigali-heights.jpg" },
-  { name: "Green Office Park", year: "2023", image: "/projects/office-park.jpg" },
-  // Add more projects as needed
 ];
 
 const ConstructionPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+    <div className="relative bg-[#1e3a8a] pt-[88px]">
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1e3a8a]/90 to-[#3b82f6]/80">
+        <div className="absolute inset-0 bg-[url('/patterns/circuit-board.svg')] opacity-5" />
+        <motion.div
+          animate={{
+            backgroundPosition: ['0% 0%', '100% 100%'],
+            opacity: [0.3, 0.5]
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+          className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10"
+        />
+      </div>
+
       {/* Hero Section */}
-      <div className="relative py-20 overflow-hidden">
-        <div className="container mx-auto px-4 relative z-10">
-          <h1 className="text-4xl lg:text-5xl font-bold text-neutral-dark text-center font-title mb-4">
-            Construction & Engineering
-          </h1>
-          <p className="text-lg lg:text-xl text-neutral-text text-center max-w-2xl mx-auto">
-            Delivering innovative engineering solutions for Rwanda's growth.
-          </p>
+      <div className="relative pt-12 pb-20">
+        <div className="container mx-auto px-4">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-4xl lg:text-5xl font-bold text-center font-title mb-4"
+          >
+            <span className="block text-[#caa04d] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#caa04d] to-[#e2c68d] filter drop-shadow-lg">
+              Construction Services
+            </span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-lg lg:text-xl text-white/80 text-center max-w-3xl mx-auto"
+          >
+            Building Rwanda's future with excellence, innovation, and precision.
+          </motion.p>
         </div>
       </div>
 
       {/* Services Grid */}
-      <div className="container mx-auto px-4 py-16">
-        {services.map((category) => (
-          <div key={category.category} className="mb-16">
-            <h2 className="text-2xl font-semibold text-blue-dark mb-8">{category.category}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {category.items.map((service) => (
-                <div
-                  key={service.title}
-                  className="bg-white/30 backdrop-blur-md rounded-xl p-6 lg:p-8 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 border border-white/20"
-                >
-                  <service.icon className="w-12 h-12 text-primary mb-4" />
-                  <h3 className="text-xl lg:text-2xl font-bold text-neutral-dark mb-2">
-                    {service.title}
-                  </h3>
-                  <p className="text-neutral-text">{service.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Featured Projects */}
-      <div className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold text-neutral-dark mb-8">Featured Projects</h2>
-        <div className="flex space-x-6 overflow-x-auto pb-6">
-          {featuredProjects.map((project) => (
-            <div
-              key={project.name}
-              className="flex-none w-72 h-48 relative rounded-xl overflow-hidden group"
+      <div className="container mx-auto px-4 py-16 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service, index) => (
+            <motion.div
+              key={service.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              className="backdrop-blur-md bg-white/10 p-6 rounded-slight hover:bg-white/20 transition-all duration-300 border border-white/10 group"
             >
-              <img
-                src={project.image}
-                alt={project.name}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
-                <div>
-                  <h3 className="text-white font-semibold">{project.name}</h3>
-                  <p className="text-white/80 text-sm">{project.year}</p>
-                </div>
-              </div>
-            </div>
+              <service.icon className="w-12 h-12 text-[#caa04d] mb-4 group-hover:scale-110 transition-transform duration-300" />
+              <h3 className="text-xl font-bold text-[#caa04d] mb-3">{service.title}</h3>
+              <p className="text-white/80 text-sm">{service.description}</p>
+            </motion.div>
           ))}
         </div>
       </div>
 
       {/* CTA Section */}
-      <div className="container mx-auto px-4 py-16 text-center">
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="bg-gradient-to-r from-blue-dark to-blue-light text-white px-8 py-3 rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-            Request a Quote
+      <div className="container mx-auto px-4 py-16 relative z-10 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="backdrop-blur-md bg-white/10 p-8 rounded-slight border border-white/10 max-w-3xl mx-auto"
+        >
+          <h2 className="text-2xl font-bold text-[#caa04d] mb-4">Ready to Start Your Project?</h2>
+          <p className="text-white/80 mb-6">Contact us today for a consultation about your construction needs.</p>
+          <button className="bg-[#caa04d] text-white px-8 py-4 rounded-slight hover:bg-[#caa04d]/80 transition-all duration-300">
+            Get in Touch
           </button>
-          <button className="border-2 border-blue-light text-blue-dark px-8 py-3 rounded-full hover:bg-blue-light hover:text-white transition-all duration-300 transform hover:scale-105">
-            Explore Projects
-          </button>
-        </div>
+        </motion.div>
       </div>
+
+      {/* Decorative Elements */}
+      <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#caa04d]/20 rounded-full blur-3xl" />
+      <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl" />
     </div>
   );
 };
