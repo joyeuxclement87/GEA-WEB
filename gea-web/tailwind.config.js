@@ -10,6 +10,10 @@ module.exports = {
         primary: '#caa04d',
         dark: '#1a1a1a',
       },
+      borderRadius: {
+        'architectural': '0px',
+        'slight': '2px',
+      }
     },
   },
   plugins: [],

@@ -75,10 +75,10 @@ const Hero = () => {
             transition={{ delay: 0.6, duration: 0.6 }}
             className="flex flex-col sm:flex-row gap-6 justify-center mb-16"
           >
-            <button className="bg-[#caa04d] text-white px-8 py-4 rounded-full hover:shadow-[0_0_20px_rgba(202,160,77,0.4)] transition-all duration-300 transform hover:scale-105 font-medium">
+            <button className="bg-[#caa04d] text-white px-8 py-4 rounded-none hover:shadow-lg transition-all duration-300 transform hover:translate-y-[-2px]">
               Explore Services
             </button>
-            <button className="backdrop-blur-md bg-white/10 text-white border-2 border-white/20 px-8 py-4 rounded-full hover:bg-white/20 transition-all duration-300 transform hover:scale-105 font-medium">
+            <button className="backdrop-blur-md bg-white/10 text-white border-2 border-white/20 px-8 py-4 rounded-none hover:bg-white/20 transition-all duration-300 transform hover:translate-y-[-2px]">
               Request a Quote
             </button>
           </motion.div>
@@ -94,7 +94,7 @@ const Hero = () => {
               <motion.div
                 key={label}
                 whileHover={{ scale: 1.05 }}
-                className="backdrop-blur-md bg-white/10 p-6 rounded-2xl hover:bg-white/20 transition-all duration-300 border border-white/10 group"
+                className="backdrop-blur-md bg-white/10 p-6 rounded-slight hover:bg-white/20 transition-all duration-300 border border-white/10 group"
               >
                 <Icon className="w-10 h-10 text-[#caa04d] mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
                 <p className="text-white text-sm font-medium">{label}</p>

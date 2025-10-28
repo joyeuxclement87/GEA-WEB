@@ -47,7 +47,7 @@ const Navbar = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                className={`px-4 py-2 text-sm font-medium transition-all duration-200 ${
                   router.pathname === item.href
                     ? 'text-[#1e3a8a] bg-blue-50'
                     : 'text-neutral-600 hover:text-[#1e3a8a] hover:bg-blue-50/50'
@@ -56,7 +56,7 @@ const Navbar = () => {
                 {item.label}
               </Link>
             ))}
-            <button className="ml-4 px-6 py-2 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white rounded-full text-sm font-medium hover:shadow-lg hover:shadow-blue-200 transition-all duration-300 transform hover:scale-105">
+            <button className="ml-4 px-6 py-2 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white rounded-none hover:shadow-lg hover:shadow-blue-200 transition-all duration-300">
               Request a Quote
             </button>
           </div>
