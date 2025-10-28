@@ -9,26 +9,34 @@ const socialLinks = [
 ];
 
 const TopBar = () => (
-  <div className="bg-dark text-white h-12 hidden md:block shadow-sm">
-    <div className="container mx-auto px-6 h-full">
+  <div className="fixed top-0 w-full z-50 bg-gradient-to-r from-[#1e3a8a] via-[#2563eb] to-[#3b82f6] text-white h-12 hidden md:block">
+    <div className="container mx-auto px-8 h-full">
       <div className="flex justify-between items-center h-full">
-        <p className="text-sm tracking-wider font-light opacity-90 hover:opacity-100 transition-opacity">
-          Delivering Quality Engineering & Real Estate Solutions in Rwanda.
-        </p>
+        <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2">
+            <span className="w-2 h-2 rounded-full bg-[#caa04d] animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-[#caa04d] animate-pulse delay-75"></span>
+          </div>
+          <p className="font-inter text-sm tracking-wide font-medium text-white">
+            Delivering Quality Engineering & Real Estate Solutions in Rwanda.
+          </p>
+        </div>
         
-        <div className="flex items-center gap-6">
-          {socialLinks.map(({ icon: Icon, href, label }) => (
-            <a
-              key={label}
-              href={href}
-              aria-label={label}
-              className="text-gray-300 hover:text-primary transform hover:scale-110 transition-all duration-200 ease-in-out"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Icon className="w-4 h-4" />
-            </a>
-          ))}
+        <div className="flex items-center">
+          <div className="flex items-center space-x-2 bg-white/10 px-4 py-1.5 rounded-full backdrop-blur-sm">
+            {socialLinks.map(({ icon: Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                aria-label={label}
+                className="p-1.5 text-white hover:text-[#caa04d] hover:bg-white/10 rounded-full transform hover:scale-110 transition-all duration-200 ease-in-out group"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon className="w-4 h-4 group-hover:rotate-6" />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </div>

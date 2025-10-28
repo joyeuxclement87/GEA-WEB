@@ -1,4 +1,5 @@
 import { FaBuilding, FaHome, FaTools } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const services = [
   { icon: FaBuilding, label: 'Construction' },
@@ -6,57 +7,110 @@ const services = [
   { icon: FaTools, label: 'Hardware Supplies' },
 ];
 
+const fadeIn = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 }
+};
+
 const Hero = () => {
   return (
-    <div className="relative h-[90vh] flex items-center">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-black/40" />
+    <div className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Background Image Layer */}
+      <div className="absolute inset-0">
         <img
-          src="/hero-bg.jpg"
-          alt="Engineering background"
+          src="/images/hero-bg.jpg" // Add engineering/construction background image
+          alt="Background"
           className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1e3a8a]/90 to-[#3b82f6]/80">
+        <div className="absolute inset-0 bg-[url('/patterns/circuit-board.svg')] opacity-5" />
+        <motion.div
+          animate={{
+            backgroundPosition: ['0% 0%', '100% 100%'],
+            opacity: [0.3, 0.5]
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+          className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10"
         />
       </div>
 
       {/* Content */}
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl">
-          <h1 className="font-title mb-4">
-            <span className="block text-primary font-bold text-5xl md:text-6xl">
-              Engineering Tomorrow,
-            </span>
-            <span className="block text-white text-4xl md:text-5xl mt-2">
-              Building Today
-            </span>
-          </h1>
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial="initial"
+            animate="animate"
+            variants={fadeIn}
+          >
+            <h1 className="font-title mb-6">
+              <span className="block text-[#caa04d] font-bold text-5xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-[#caa04d] to-[#e2c68d] filter drop-shadow-lg">
+                Engineering Tomorrow,
+              </span>
+              <span className="block text-white text-4xl md:text-6xl mt-2 filter drop-shadow-lg">
+                Building Today
+              </span>
+            </h1>
+          </motion.div>
 
-          <p className="text-gray-200 text-base md:text-lg mb-8 max-w-2xl">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="text-white/90 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed"
+          >
             Comprehensive solutions in Construction, Real Estate, and Hardware, tailored for Rwanda's growth.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-col sm:flex-row gap-4 mb-16">
-            <button className="bg-primary text-white px-6 py-3 rounded-full hover:shadow-lg transition duration-300">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="flex flex-col sm:flex-row gap-6 justify-center mb-16"
+          >
+            <button className="bg-[#caa04d] text-white px-8 py-4 rounded-full hover:shadow-[0_0_20px_rgba(202,160,77,0.4)] transition-all duration-300 transform hover:scale-105 font-medium">
               Explore Services
             </button>
-            <button className="border-2 border-primary text-white px-6 py-3 rounded-full hover:bg-primary hover:text-white transition duration-300">
+            <button className="backdrop-blur-md bg-white/10 text-white border-2 border-white/20 px-8 py-4 rounded-full hover:bg-white/20 transition-all duration-300 transform hover:scale-105 font-medium">
               Request a Quote
             </button>
-          </div>
+          </motion.div>
 
           {/* Service Icons */}
-          <div className="grid grid-cols-3 gap-8 max-w-2xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.6 }}
+            className="grid grid-cols-3 gap-8 max-w-3xl mx-auto"
+          >
             {services.map(({ icon: Icon, label }) => (
-              <div key={label} className="text-center">
-                <div className="bg-white/10 p-4 rounded-lg backdrop-blur-sm hover:bg-white/20 transition duration-300">
-                  <Icon className="w-8 h-8 text-primary mx-auto mb-2" />
-                  <p className="text-white text-sm">{label}</p>
-                </div>
-              </div>
+              <motion.div
+                key={label}
+                whileHover={{ scale: 1.05 }}
+                className="backdrop-blur-md bg-white/10 p-6 rounded-2xl hover:bg-white/20 transition-all duration-300 border border-white/10 group"
+              >
+                <Icon className="w-10 h-10 text-[#caa04d] mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
+                <p className="text-white text-sm font-medium">{label}</p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
+
+      {/* Enhanced Decorative Elements */}
+      <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#caa04d]/20 rounded-full blur-3xl" />
+      <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl" />
+      
+      {/* Additional Light Effects */}
+      <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
     </div>
   );
 };
