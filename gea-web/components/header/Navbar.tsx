@@ -1,106 +1,100 @@
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { HiMenuAlt3, HiX } from 'react-icons/hi';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
-const navItems = [
+const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
-  { label: 'Construction', href: '/construction' },
-  { label: 'Real Estate', href: '/real-estate' },
-  { label: 'Hardware', href: '/hardware' },
+  { label: 'Construction', href: '/services/construction' },
+  { label: 'Real Estate', href: '/services/real-estate' },
+  { label: 'Hardware', href: '/services/hardware' },
   { label: 'Projects', href: '/projects' },
   { label: 'Contact', href: '/contact' },
 ];
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const router = useRouter();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
+  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 10);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <nav className={`fixed w-full top-12 z-40 transition-all duration-300 ${
-      scrolled ? 'bg-white/95 backdrop-blur-lg shadow-lg' : 'bg-white/80 backdrop-blur-md'
-    }`}>
-      <div className="container mx-auto px-8">
-        <div className="flex items-center justify-between h-20">
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="relative">
-              <span className="absolute -inset-1 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] rounded-lg blur-lg opacity-0 group-hover:opacity-20 transition-opacity duration-500"></span>
-              <span className="font-bold text-2xl text-[#1e3a8a] relative">GEA</span>
-            </div>
-            <span className="text-neutral-600 font-light hidden md:block group-hover:text-neutral-800 transition-colors">
-              Global Engineering Agency
-            </span>
+    <nav
+      className={`fixed top-10 w-full z-40 transition-all duration-300 ${
+        isScrolled
+          ? 'backdrop-blur-md bg-[#1e3a8a]/95'
+          : 'backdrop-blur-none bg-transparent'
+      } border-b border-white/10`}
+    >
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo - Adjusted size for mobile */}
+          <Link href="/" className="relative z-50">
+            <img src="/logo.png" alt="GEA Logo" className="h-6 md:h-8" />
           </Link>
 
-          <div className="hidden md:flex items-center space-x-1">
-            {navItems.map((item) => (
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-6">
+            {navLinks.map(({ label, href }) => (
               <Link
-                key={item.href}
-                href={item.href}
-                className={`px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                  router.pathname === item.href
-                    ? 'text-[#1e3a8a] bg-blue-50'
-                    : 'text-neutral-600 hover:text-[#1e3a8a] hover:bg-blue-50/50'
-                }`}
+                key={label}
+                href={href}
+                className="text-white hover:text-[#caa04d] transition-colors text-sm font-medium"
               >
-                {item.label}
+                {label}
               </Link>
             ))}
-            <button className="ml-4 px-6 py-2 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white rounded-none hover:shadow-lg hover:shadow-blue-200 transition-all duration-300">
-              Request a Quote
-            </button>
           </div>
 
+          {/* Mobile Menu Button - Adjusted positioning and visibility */}
           <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-neutral-600 hover:text-[#1e3a8a] transition-colors"
+            className="md:hidden relative z-50 w-8 h-8 flex items-center justify-center bg-white/10 rounded-slight"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
-            {isOpen ? <HiX size={24} /> : <HiMenuAlt3 size={24} />}
+            {isMenuOpen ? (
+              <FaTimes className="w-5 h-5 text-white" />
+            ) : (
+              <FaBars className="w-5 h-5 text-white" />
+            )}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <div className={`fixed top-0 right-0 h-full w-4/5 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out ${
-        isOpen ? 'translate-x-0' : 'translate-x-full'
-      } md:hidden`}>
-        <div className="p-6">
-          <div className="flex justify-end">
-            <button onClick={() => setIsOpen(false)} className="text-neutral-600 hover:text-[#1e3a8a]">
-              <HiX size={24} />
-            </button>
-          </div>
-          <div className="mt-8 space-y-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`block px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  router.pathname === item.href
-                    ? 'text-[#1e3a8a] bg-blue-50'
-                    : 'text-neutral-600 hover:text-[#1e3a8a] hover:bg-blue-50/50'
-                }`}
-                onClick={() => setIsOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <button className="w-full mt-6 px-6 py-3 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white rounded-full text-sm font-medium hover:shadow-lg transition-all duration-300">
-              Request a Quote
-            </button>
-          </div>
-        </div>
-      </div>
+      {/* Mobile Menu - Updated styling */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="fixed inset-0 top-[104px] bg-[#1e3a8a]/98 backdrop-blur-md md:hidden overflow-y-auto"
+          >
+            <div className="container mx-auto px-4 py-6">
+              <div className="flex flex-col">
+                {navLinks.map(({ label, href }) => (
+                  <Link
+                    key={label}
+                    href={href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-white py-3 text-base font-medium border-b border-white/10 hover:text-[#caa04d] transition-colors"
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

@@ -1,46 +1,34 @@
-import { FaWhatsapp, FaEnvelope, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
+import { FaPhone, FaEnvelope } from 'react-icons/fa';
 
-const socialLinks = [
-  { icon: FaWhatsapp, href: 'https://wa.me/250788888888', label: 'WhatsApp' },
-  { icon: FaEnvelope, href: 'mailto:info@globalengineeringagency.com', label: 'Email' },
-  { icon: FaLinkedin, href: 'https://linkedin.com/company/gea-rwanda', label: 'LinkedIn' },
-  { icon: FaFacebook, href: 'https://facebook.com/gea-rwanda', label: 'Facebook' },
-  { icon: FaInstagram, href: 'https://instagram.com/gea-rwanda', label: 'Instagram' },
-];
-
-const TopBar = () => (
-  <div className="fixed top-0 w-full z-50 backdrop-blur-md bg-[#1e3a8a]/80 border-b border-white/10 text-white h-12 hidden md:block">
-    <div className="container mx-auto px-8 h-full">
-      <div className="flex justify-between items-center h-full">
-        <div className="flex items-center space-x-3">
-          <div className="flex items-center space-x-2">
-            <span className="w-2 h-2 rounded-full bg-[#caa04d] animate-pulse"></span>
-            <span className="w-2 h-2 rounded-full bg-[#caa04d] animate-pulse delay-75"></span>
+const TopBar = () => {
+  return (
+    <div className="fixed top-0 w-full z-50 backdrop-blur-md bg-[#1e3a8a]/95 border-b border-white/10">
+      <div className="container mx-auto px-4">
+        <div className="h-10 flex justify-between items-center">
+          {/* Contact Info - Show only important info on mobile */}
+          <div className="flex items-center space-x-4">
+            <a
+              href="tel:+250788123456"
+              className="flex items-center space-x-2 text-white/80 hover:text-[#caa04d] transition-colors"
+            >
+              <FaPhone className="w-3 h-3" />
+              <span className="text-xs hidden md:inline">+250 788 123 456</span>
+            </a>
+            <a
+              href="mailto:info@gea.rw"
+              className="hidden md:flex items-center space-x-2 text-white/80 hover:text-[#caa04d] transition-colors"
+            >
+              <FaEnvelope className="w-3 h-3" />
+              <span className="text-xs">info@gea.rw</span>
+            </a>
           </div>
-          <p className="font-inter text-sm tracking-wide font-medium text-white/90">
-            Delivering Quality Engineering & Real Estate Solutions in Rwanda.
-          </p>
-        </div>
-        
-        <div className="flex items-center">
-          <div className="flex items-center space-x-2 bg-white/5 px-4 py-1.5 rounded-slight border border-white/10 backdrop-blur-sm">
-            {socialLinks.map(({ icon: Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                aria-label={label}
-                className="p-1.5 text-white/90 hover:text-[#caa04d] hover:bg-white/10 rounded-slight transform hover:scale-105 transition-all duration-200 ease-in-out group"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Icon className="w-4 h-4 group-hover:rotate-6" />
-              </a>
-            ))}
+          <div className="text-xs text-white/80 hidden md:block">
+            <span>KG 33 Avenue, Umukindo House, Kigali</span>
           </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default TopBar;
